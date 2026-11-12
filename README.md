@@ -94,3 +94,14 @@ Start with [the 16-slide showcase](examples/showcase.md). Keep its `assets/` fol
 ## License
 
 MIT. Third-party themes retain their own licenses; see `themes/LICENSE_*` and [theme sources](themes/SOURCES.md).
+
+## AI-assisted theme authoring
+
+The repo includes the [`slate-theme` agent skill](.agents/skills/slate-theme/SKILL.md). Compatible agents can discover it under `.agents/skills`; other agents can read that file directly.
+
+Example requests:
+
+- “Use $slate-theme to create a warm minimalist business theme with a plum accent.”
+- “Use $slate-theme with this Slidesgo or Google Slides template link as visual inspiration. Build an original Marp theme and editable example deck.”
+
+The skill covers reference inspection, original design, offline-compatible CSS, Markdown layout classes, source/license notes, and visual verification. Its local preview helper produces screenshots, a PDF, and diagnostics through Slate’s renderer without a running server or publishing token. It is theme authoring, not automatic Google Slides/PPTX conversion. See the skill for invocation and browser requirements.
