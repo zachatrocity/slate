@@ -105,3 +105,22 @@ Example requests:
 - “Use $slate-theme with this Slidesgo or Google Slides template link as visual inspiration. Build an original Marp theme and editable example deck.”
 
 The skill covers reference inspection, original design, offline-compatible CSS, Markdown layout classes, source/license notes, and visual verification. Its local preview helper produces screenshots, a PDF, and diagnostics through Slate’s renderer without a running server or publishing token. It is theme authoring, not automatic Google Slides/PPTX conversion. See the skill for invocation and browser requirements.
+
+## Presenter mode
+
+Open a published slideshow and choose **Presenter**. The presenter screen shows the current and next slides, notes, navigation, and a start/pause/reset timer. Choose **Open audience window**, move that clean window to your projector, and press **F** or double-click inside it for fullscreen. Escape exits fullscreen. If popups are blocked, use **Open manually**; if fullscreen is unsupported, maximize the window or use browser fullscreen.
+
+Write notes as ordinary Marp comments:
+
+```markdown
+# Quarterly results
+<!-- Mention that the comparison uses the same quarter last year. -->
+```
+
+Notes are displayed as plain text. Directive comments such as `<!-- _class: title -->` are not speaker notes. **Notes are embedded in the published HTML and accessible to anyone who can access the deck.** Audience mode hides them visually; it is not a secrecy boundary.
+
+Synchronization uses BroadcastChannel between windows in the same browser profile and same deck/session URL. Separate presenter sessions do not control one another. This is not casting, cross-device remote control, or automatic monitor selection. Mobile browsers may restrict multiple windows and fullscreen; use a desktop connected to the projector for the intended flow. If synchronization is unavailable, the UI explains how to fall back to the regular slideshow.
+
+Existing published HTML keeps its original viewer until the deck is **republished** after upgrade. Republishing retains its URLs. PDF exports remain slide-only, without notes or presenter controls.
+
+Browser regression tests: `CHROME_PATH=/path/to/chrome npm run test:browser`. Tests exercise two-window navigation, session isolation, notes, timer controls, blocked popups/fullscreen, touch navigation, and print layout. A physical projector and real mobile multiwindow behavior still require manual acceptance testing.
