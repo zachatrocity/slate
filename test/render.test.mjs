@@ -7,3 +7,11 @@ test('speaker notes stay aligned, exclude directives, and cannot break their JSO
  const encoded=d.html.match(/<script id="slide-notes" type="application\/json">([\s\S]*?)<\/script>/)[1];
  const notes=JSON.parse(encoded);assert.equal(notes.length,2);assert.match(notes[0][0],/Remember/);assert.equal(notes[1][0],'Second note');assert.ok(!encoded.includes('<'));assert.ok(!notes.flat().some(n=>n.includes('_class')));
 });
+
+test('emoji stay offline as Unicode instead of remote Twemoji images',()=>{
+ const d=render('# Emoji\n\n🤔 ⚠️ 💰 ✅ ❌ ❓ :smile:', 'default',new Map(),'Emoji');
+ assert.ok(!d.html.includes('cdn.jsdelivr.net'));
+ assert.ok(!d.html.includes('assets/svg/'));
+ assert.match(d.html,/🤔/);
+ assert.match(d.html,/😄/);
+});

@@ -11,7 +11,7 @@ export function render(markdown, theme, themes, title){
  // Keep author-facing Marp options, never render private publishing metadata.
  const allowed={};for(const k of ['paginate','size','class','header','footer','backgroundColor','color'])if(k in fm)allowed[k]=fm[k];
  allowed.theme=selected;
- const marp=new Marp({html:false});for(const css of themes.values())marp.themeSet.add(css);
+ const marp=new Marp({html:false,emoji:{unicode:true,shortcode:true}});for(const css of themes.values())marp.themeSet.add(css);
  const r=marp.render('---\n'+YAML.stringify(allowed)+'---\n'+body);
  const dimensions=r.html.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);const width=Number(dimensions?.[1]||1280),height=Number(dimensions?.[2]||720);
  const css=r.css.replace(/<\/style/gi,'<\\/style');
