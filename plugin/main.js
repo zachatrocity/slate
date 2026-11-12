@@ -160,7 +160,7 @@ var SettingsTab = class extends import_obsidian.PluginSettingTab {
         await this.p.saveData(this.p.settings);
       });
     });
-    new import_obsidian.Setting(c).setName("Default theme").setDesc("Use slide_theme in a note to override. Built-ins: default, gaia, uncover; Slate: slate; community: graph_paper.").addText((t) => t.setValue(this.p.settings.theme).onChange(async (v) => {
+    new import_obsidian.Setting(c).setName("Default theme").setDesc("Use slide_theme in a note to override. Themes: slate, default, gaia, uncover, graph_paper, dracula, nord, neobeam, rose-pine, rose-pine-moon, rose-pine-dawn.").addText((t) => t.setValue(this.p.settings.theme).onChange(async (v) => {
       this.p.settings.theme = v;
       await this.p.saveData(this.p.settings);
     }));

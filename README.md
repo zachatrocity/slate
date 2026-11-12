@@ -58,7 +58,7 @@ Publishing writes `slide_id`, `slides_url`, `slides_pdf`, and `slide_theme` to f
 
 ## Themes
 
-Includes the purple `slate` theme, Marp's `default`, `gaia`, and `uncover`, plus licensed Graph Paper. Import standard Marp CSS containing `/* @theme name */` through the website. Find themes in the [Marp Community Themes gallery](https://rnd195.github.io/marp-community-themes/).
+Includes `slate`, Marp’s `default` / `gaia` / `uncover`, `graph_paper`, `dracula`, `nord`, `neobeam`, and `rose-pine` / `rose-pine-moon` / `rose-pine-dawn`. Select a theme on the website or set `slide_theme` in your note. See [theme sources and adaptations](themes/SOURCES.md) for pinned upstream revisions and license notices. Import standard Marp CSS containing `/* @theme name */` through the website. Find themes in the [Marp Community Themes gallery](https://rnd195.github.io/marp-community-themes/).
 
 Use self-contained themes or themes based on the built-ins. External fonts and network assets are blocked during rendering. Import dependency themes individually. Check each theme's license before redistributing it; Graph Paper's license is included in `themes/`.
 
@@ -93,4 +93,4 @@ Start with [the 16-slide showcase](examples/showcase.md). Keep its `assets/` fol
 
 ## License
 
-MIT. Third-party themes retain their own licenses; see `themes/LICENSE_graph_paper`.
+MIT. Third-party themes retain their own licenses; see `themes/LICENSE_*` and [theme sources](themes/SOURCES.md).
