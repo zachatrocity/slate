@@ -13,6 +13,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - run: npm run test:browser
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
       - run: npm ci --prefix plugin
       - run: npm run build --prefix plugin
       - run: docker compose config --quiet

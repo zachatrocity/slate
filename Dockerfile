@@ -3,7 +3,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends chromium fonts-
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev
-COPY --chown=node:node server.mjs render.mjs ./
+COPY --chown=node:node server.mjs render.mjs viewer.mjs ./
 COPY --chown=node:node themes ./themes
 COPY --chown=node:node public ./public
 RUN mkdir /data && chown node:node /data

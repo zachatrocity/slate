@@ -188,12 +188,12 @@ Marp uses HTML comments for speaker notes:
 <!-- Remind the audience to try publishing from their phone. -->
 ```
 
-Slate currently has **no presenter-notes view**.
+Choose **Presenter** in the slideshow to see notes and next-slide previews.
 
-Slate exports **HTML slideshows and PDF**. PowerPoint export,
-transitions, and a presenter console belong to other Marp tooling.
+Slate exports **HTML slideshows and PDF**. PowerPoint export and
+transitions are not implemented. Notes are public deck data, not secrets.
 
-<!-- Presenter reminder: this is an authoring example, not a Slate notes-view demo. -->
+<!-- Presenter reminder: open the audience window and move it to your projector. -->
 
 ---
 # Make this deck yours
