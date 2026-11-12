@@ -1,0 +1,1 @@
+{"name":"slate","version":"0.1.0","type":"module","private":true,"scripts":{"start":"node server.mjs","test":"node --test test/*.test.mjs"},"dependencies":{"@marp-team/marp-core":"^4.2.0","express":"^5.1.0","puppeteer-core":"^24.0.0","yaml":"^2.8.0"}}

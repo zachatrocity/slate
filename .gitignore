@@ -1,0 +1,10 @@
+node_modules/
+plugin/node_modules/
+.env
+data/
+*.log
+output/
+.env.*
+!.env.example
+research/
+.DS_Store

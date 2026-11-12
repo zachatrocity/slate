@@ -1,0 +1,9 @@
+/* @theme slate */
+@import 'default';
+section { background: #19171f; color: #eeeaf4; font-family: sans-serif; padding: 64px; }
+h1, h2, h3 { color: #b69aff; }
+a { color: #c6b2f2; }
+code { background: #30283e; color: #ded1fa; }
+pre { background: #211e29; border: 1px solid #514461; }
+blockquote { color: #b8b0c5; border-left-color: #b69aff; }
+section::after { color: #aaa0b8; }

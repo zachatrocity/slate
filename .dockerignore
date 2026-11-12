@@ -1,0 +1,10 @@
+node_modules
+plugin
+.git
+.env
+data
+test
+research
+
+output
+.env.*

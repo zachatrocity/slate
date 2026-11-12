@@ -1,0 +1,96 @@
+# Slate
+
+Self-hosted Markdown-to-slideshow and PDF publishing, with an optional Obsidian plugin for desktop and mobile.
+
+Upload Markdown and local images, choose a Marp theme, and publish. Republishing a deck updates its existing URLs. The Obsidian plugin saves those URLs in note frontmatter. Preview reflects the last publish, not unsaved edits.
+
+## Run with Docker Compose
+
+Requires Docker with Compose. From this directory:
+
+```sh
+git clone https://github.com/zachatrocity/slate.git
+cd slate
+cp .env.example .env
+openssl rand -hex 32
+# Set PUBLISH_TOKEN in .env to the generated value.
+docker compose up -d --build
+```
+
+Open http://localhost:3000. Enter your publishing token to publish a deck or import a theme. Data and themes persist in the `slate_data` Docker volume.
+
+### Access from other devices
+
+Set `PUBLIC_URL` in `.env` to the URL your clients will use. The default port binds only to localhost. Use an HTTPS reverse proxy for remote access; set `BIND_ADDRESS` to a reachable interface if needed. `PORT` controls the host port. A containerized reverse proxy can instead share a Docker network and route to `slate:3000`.
+
+Run `docker compose up -d` after configuration changes. No particular VPN, domain, or proxy is required.
+
+**Access model:** the publishing token protects writes. Slideshow, PDF, theme-list and setup pages do not require authentication. For private presentations, restrict access with a VPN or an authenticated reverse proxy. Use HTTPS outside localhost to protect publishing tokens in transit.
+
+Back up the data volume and `.env`. Previous deck revisions are retained; automatic cleanup is not implemented. Do not commit `.env` or plugin settings containing tokens.
+
+## Obsidian
+
+1. Download the plugin ZIP from your server and extract `main.js` and `manifest.json` into `.obsidian/plugins/slate/` in your vault.
+2. Reload Obsidian and enable Slate under Community plugins.
+3. In Slate settings, enter your server URL and publishing token.
+4. Open a Markdown note and run **Slate: Publish slides**.
+
+For mobile, copy or sync the plugin files and settings using a method supported by your device, then enable the plugin. Your device must be able to reach the server. Publishing credentials are stored in plugin `data.json`, not in notes.
+
+Separate slides with `---`. Example note:
+
+```markdown
+---
+slide_theme: graph_paper
+---
+# My presentation
+
+A short introduction.
+
+---
+# Second slide
+
+More content.
+```
+
+Publishing writes `slide_id`, `slides_url`, `slides_pdf`, and `slide_theme` to frontmatter. Keep `slide_id` to update the same deck; remove it to publish a separate deck.
+
+## Themes
+
+Includes the purple `slate` theme, Marp's `default`, `gaia`, and `uncover`, plus licensed Graph Paper. Import standard Marp CSS containing `/* @theme name */` through the website. Find themes in the [Marp Community Themes gallery](https://rnd195.github.io/marp-community-themes/).
+
+Use self-contained themes or themes based on the built-ins. External fonts and network assets are blocked during rendering. Import dependency themes individually. Check each theme's license before redistributing it; Graph Paper's license is included in `themes/`.
+
+## Development and verification
+
+```sh
+npm ci
+npm test
+cd plugin
+npm ci
+npm run build
+```
+
+To run the service without Docker, install Chromium, set `PUBLISH_TOKEN`, `PUBLIC_URL`, and `CHROME_PATH`, then run `npm start`. `DATA_DIR` defaults to `./data`; the service listens on `PORT` (default 3000).
+
+The browser smoke test creates a deck, republishes it, checks navigation, and downloads its PDF. Against a running server:
+
+```sh
+# Supply PUBLISH_TOKEN through your shell environment.
+PUBLIC_URL=http://localhost:3000 CHROME_PATH=/usr/bin/chromium node test-live.mjs
+```
+
+Artifacts go to `output/` (override with `TEST_OUTPUT_DIR`). The smoke test retains its generated deck. Browser tests do not substitute for testing the Obsidian command on a physical phone.
+
+## Current limits
+
+PNG/JPEG/GIF/WebP images are supported. Note embeds, SVG, video, and reference-style images are not. Rendering is limited to one concurrent job, 150 slides, and 40 MB of images. This is a shared-token service, not a multi-user permissions system.
+
+## Demo
+
+Start with [the 16-slide showcase](examples/showcase.md). Keep its `assets/` folder alongside the Markdown file. It demonstrates formatting, code, math, image layouts and filters, gradients, pagination, and themes, and explains current viewer limits.
+
+## License
+
+MIT. Third-party themes retain their own licenses; see `themes/LICENSE_graph_paper`.
