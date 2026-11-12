@@ -4,6 +4,16 @@ Self-hosted Markdown-to-slideshow and PDF publishing, with an optional Obsidian 
 
 Upload Markdown and local images, choose a Marp theme, and publish. Republishing a deck updates its existing URLs. The Obsidian plugin saves those URLs in note frontmatter. Preview reflects the last publish, not unsaved edits.
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/images/obsidian-mobile.png" alt="Slate in Obsidian mobile, with slideshow and PDF links saved in note properties" width="30%">
+  <img src="docs/images/publish-mobile.png" alt="Slate mobile publishing page with Obsidian plugin download and deck upload" width="30%">
+  <img src="docs/images/slideshow-mobile.png" alt="Published Slate slideshow on mobile with navigation, PDF and presenter controls" width="30%">
+</p>
+
+<p align="center"><em>Write in Obsidian · Publish from your browser · Present your slides</em></p>
+
 ## Run with Docker Compose
 
 Requires Docker with Compose. From this directory:
